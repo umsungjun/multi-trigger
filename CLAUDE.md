@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 프로젝트 개요
 
-MyStockRadar는 미국 주식(Finnhub), 한국 주식(KIS), 암호화폐(Binance)의 가격을 모니터링하고 목표가 도달 시 FCM 푸시 알림을 보내는 Next.js 앱입니다.
+MultiTrigger는 미국 주식(Finnhub), 한국 주식(KIS), 암호화폐(Binance)의 가격을 모니터링하고 목표가 도달 시 FCM 푸시 알림을 보내는 Next.js 앱입니다.
 
 ## 개발 명령어
 

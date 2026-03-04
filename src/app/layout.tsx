@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "MyStockRadar - 나만의 투자 알림",
+  title: "나만의 투자 알림 - MultiTrigger",
   description: "미국 주식, 한국 주식, 암호화폐 가격을 모니터링하고 목표가 도달 시 즉시 알림을 받으세요.",
 };
 

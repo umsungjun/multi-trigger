@@ -26,7 +26,7 @@ export function NotificationSetup() {
         notification?: { title?: string; body?: string };
       };
       if (p.notification) {
-        new Notification(p.notification.title || "MyStockRadar", {
+        new Notification(p.notification.title || "MultiTrigger", {
           body: p.notification.body,
           icon: "/favicon.ico",
         });

@@ -18,7 +18,7 @@ const messaging = firebase.messaging();
 
 messaging.onBackgroundMessage((payload) => {
   const { title, body } = payload.notification || {};
-  self.registration.showNotification(title || "MyStockRadar", {
+  self.registration.showNotification(title || "MultiTrigger", {
     body: body || "가격 알림이 도착했습니다",
     icon: "/favicon.ico",
     badge: "/favicon.ico",

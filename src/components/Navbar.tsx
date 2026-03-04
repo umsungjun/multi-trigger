@@ -18,7 +18,7 @@ export function Navbar() {
               </svg>
             </div>
             <span className="text-lg font-bold bg-linear-to-r from-gradient-start to-gradient-end bg-clip-text text-transparent">
-              MyStockRadar
+              MultiTrigger
             </span>
           </Link>
           {session && (
