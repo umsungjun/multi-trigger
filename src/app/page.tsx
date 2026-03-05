@@ -35,7 +35,7 @@ export default function Home() {
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-2xl w-full mb-12">
-          <div className="group p-6 rounded-2xl bg-card border border-card-border hover:border-accent/30 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300">
+          <div className="group p-6 rounded-2xl bg-card border border-card-border hover:border-accent/30 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300 flex flex-col items-center text-center">
             <div className="w-12 h-12 rounded-xl bg-linear-to-br from-blue-500 to-cyan-400 flex items-center justify-center text-white text-xl mb-4">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
                 <path fillRule="evenodd" d="M2.25 13.5a8.25 8.25 0 018.25-8.25.75.75 0 01.75.75v6.75H18a.75.75 0 01.75.75 8.25 8.25 0 01-16.5 0z" clipRule="evenodd" />
@@ -48,11 +48,11 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="group p-6 rounded-2xl bg-card border border-card-border hover:border-accent/30 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300">
-            <div className="w-12 h-12 rounded-xl bg-linear-to-br from-orange-500 to-yellow-400 flex items-center justify-center text-white text-xl mb-4">
+          <div className="group p-6 rounded-2xl bg-card border border-card-border hover:border-accent/30 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300 flex flex-col items-center text-center">
+            <div className="w-12 h-12 rounded-xl bg-linear-to-br from-orange-500 to-yellow-400 flex items-center justify-center text-white mb-4">
+              {/* Bitcoin 아이콘 */}
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
-                <path d="M12 7.5a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5z" />
-                <path fillRule="evenodd" d="M1.5 4.875C1.5 3.839 2.34 3 3.375 3h17.25c1.035 0 1.875.84 1.875 1.875v9.75c0 1.036-.84 1.875-1.875 1.875H3.375A1.875 1.875 0 011.5 14.625v-9.75zM8.25 9.75a3.75 3.75 0 117.5 0 3.75 3.75 0 01-7.5 0zM18.75 9a.75.75 0 00-.75.75v.008c0 .414.336.75.75.75h.008a.75.75 0 00.75-.75V9.75a.75.75 0 00-.75-.75h-.008zM4.5 9.75A.75.75 0 015.25 9h.008a.75.75 0 01.75.75v.008a.75.75 0 01-.75.75H5.25a.75.75 0 01-.75-.75V9.75z" clipRule="evenodd" />
+                <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm1.25 14.5H13v1a.75.75 0 01-1.5 0v-1h-.75v1a.75.75 0 01-1.5 0v-1H8a.75.75 0 010-1.5h.5V9H8a.75.75 0 010-1.5h1.25v-1a.75.75 0 011.5 0v1H11v-1a.75.75 0 011.5 0v1h.75c1.24 0 2.25 1.01 2.25 2.25 0 .61-.24 1.16-.63 1.57.6.44.98 1.14.98 1.93 0 1.38-1.12 2.25-2.6 2.25zm-.5-4.5h-.75v2h.75c.55 0 1-.45 1-1s-.45-1-1-1zm.25-3h-.75v-1.5h.75c.55 0 1 .45 1 1s-.45 1-1 1z" />
               </svg>
             </div>
             <h3 className="font-bold mb-1.5">암호화폐</h3>
@@ -61,7 +61,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="group p-6 rounded-2xl bg-card border border-card-border hover:border-accent/30 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300">
+          <div className="group p-6 rounded-2xl bg-card border border-card-border hover:border-accent/30 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300 flex flex-col items-center text-center">
             <div className="w-12 h-12 rounded-xl bg-linear-to-br from-accent to-purple-500 flex items-center justify-center text-white text-xl mb-4">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
                 <path fillRule="evenodd" d="M5.25 9a6.75 6.75 0 0113.5 0v.75c0 2.123.8 4.057 2.118 5.52a.75.75 0 01-.297 1.206c-1.544.57-3.16.99-4.831 1.243a3.75 3.75 0 11-7.48 0 24.585 24.585 0 01-4.831-1.244.75.75 0 01-.298-1.205A8.217 8.217 0 005.25 9.75V9zm4.502 8.9a2.25 2.25 0 104.496 0 25.057 25.057 0 01-4.496 0z" clipRule="evenodd" />
@@ -74,7 +74,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="flex flex-col sm:flex-row items-center gap-4">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Link
             href="/dashboard"
             className="px-8 py-3.5 rounded-2xl bg-linear-to-r from-gradient-start to-gradient-end text-white font-semibold text-lg shadow-lg shadow-accent/25 hover:shadow-xl hover:shadow-accent/30 hover:-translate-y-0.5 transition-all duration-300"
