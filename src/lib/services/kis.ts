@@ -1,55 +1,28 @@
-// 한국투자증권 OpenAPI
-// 실제 사용 시 https://apiportal.koreainvestment.com 에서 앱 키 발급 필요
-// 모의투자 도메인 사용 (실전: https://openapi.koreainvestment.com:9443)
-const KIS_BASE = "https://openapivts.koreainvestment.com:29443";
+// Yahoo Finance를 통한 한국 주식 가격 조회
+// KOSPI: {종목코드}.KS, KOSDAQ: {종목코드}.KQ
+// API 키 불필요, 가입 불필요
 
-let cachedToken: { token: string; expiresAt: number } | null = null;
+const YF_BASE = "https://query1.finance.yahoo.com/v8/finance/chart";
 
-async function getAccessToken(): Promise<string> {
-  if (cachedToken && Date.now() < cachedToken.expiresAt) {
-    return cachedToken.token;
-  }
+// KOSDAQ 종목 코드 목록 (나머지는 KOSPI로 처리)
+const KOSDAQ_CODES = new Set(["035720", "247540", "086520", "196170", "112040"]);
 
-  const res = await fetch(`${KIS_BASE}/oauth2/tokenP`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      grant_type: "client_credentials",
-      appkey: process.env.KIS_APP_KEY,
-      appsecret: process.env.KIS_APP_SECRET,
-    }),
-  });
-
-  if (!res.ok) throw new Error("KIS token fetch failed");
-  const data = await res.json();
-  cachedToken = {
-    token: data.access_token,
-    expiresAt: Date.now() + 23 * 60 * 60 * 1000, // 약 23시간
-  };
-  return data.access_token;
+function toYahooSymbol(code: string): string {
+  return KOSDAQ_CODES.has(code) ? `${code}.KQ` : `${code}.KS`;
 }
 
 export async function getKRStockPrice(
   stockCode: string
 ): Promise<number | null> {
   try {
-    const token = await getAccessToken();
-    const res = await fetch(
-      `${KIS_BASE}/uapi/domestic-stock/v1/quotations/inquire-price?FID_COND_MRKT_DIV_CODE=J&FID_INPUT_ISCD=${stockCode}`,
-      {
-        headers: {
-          authorization: `Bearer ${token}`,
-          appkey: process.env.KIS_APP_KEY!,
-          appsecret: process.env.KIS_APP_SECRET!,
-          tr_id: "FHKST01010100",
-          "Content-Type": "application/json",
-        },
-        next: { revalidate: 60 },
-      }
-    );
+    const symbol = toYahooSymbol(stockCode);
+    const res = await fetch(`${YF_BASE}/${symbol}`, {
+      next: { revalidate: 60 },
+    });
     if (!res.ok) return null;
     const data = await res.json();
-    return parseInt(data.output?.stck_prpr) || null; // 주식 현재가
+    const price = data?.chart?.result?.[0]?.meta?.regularMarketPrice;
+    return typeof price === "number" ? price : null;
   } catch {
     return null;
   }
@@ -59,8 +32,7 @@ export async function getKRStockPrices(
   codes: string[]
 ): Promise<Record<string, number>> {
   const prices: Record<string, number> = {};
-  // 한투 API는 종목별 개별 호출 필요
-  const results = await Promise.allSettled(
+  await Promise.allSettled(
     codes.map(async (code) => {
       const price = await getKRStockPrice(code);
       if (price !== null) prices[code] = price;
@@ -69,7 +41,7 @@ export async function getKRStockPrices(
   return prices;
 }
 
-// 한국 주식 검색은 정적 데이터로 처리 (API 호출 절약)
+// 한국 주식 검색은 정적 데이터로 처리
 const POPULAR_KR_STOCKS = [
   { symbol: "005930", name: "삼성전자" },
   { symbol: "000660", name: "SK하이닉스" },
@@ -80,7 +52,7 @@ const POPULAR_KR_STOCKS = [
   { symbol: "051910", name: "LG화학" },
   { symbol: "035420", name: "NAVER" },
   { symbol: "000270", name: "기아" },
-  { symbol: "035720", name: "카카오" },
+  { symbol: "035720", name: "카카오" }, // KOSDAQ
   { symbol: "105560", name: "KB금융" },
   { symbol: "055550", name: "신한지주" },
   { symbol: "066570", name: "LG전자" },
