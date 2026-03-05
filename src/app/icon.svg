@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <defs>
+    <linearGradient id="boltGrad" x1="348" y1="30" x2="164" y2="482" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#A78BFA"/>
+      <stop offset="0.5" stop-color="#6D28D9"/>
+      <stop offset="1" stop-color="#1D4ED8"/>
+    </linearGradient>
+    <filter id="glow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="22" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- 번개 글로우 레이어 -->
+  <path d="M 348 30 L 278 30 L 168 278 L 232 278 L 164 482 L 234 482 L 344 234 L 282 234 Z"
+        fill="#7C3AED" filter="url(#glow)" opacity="0.7"/>
+
+  <!-- 번개 본체 -->
+  <path d="M 348 30 L 278 30 L 168 278 L 232 278 L 164 482 L 234 482 L 344 234 L 282 234 Z"
+        fill="url(#boltGrad)"/>
+</svg>
