@@ -1,6 +1,8 @@
 import Link from "next/link";
+import { auth } from "@/lib/auth";
 
-export default function Home() {
+export default async function Home() {
+  const session = await auth();
   return (
     <div className="flex flex-col items-center justify-center min-h-[80vh] text-center relative">
       {/* Background gradient orbs */}
@@ -79,14 +81,16 @@ export default function Home() {
             href="/dashboard"
             className="px-8 py-3.5 rounded-2xl bg-linear-to-r from-gradient-start to-gradient-end text-white font-semibold text-lg shadow-lg shadow-accent/25 hover:shadow-xl hover:shadow-accent/30 hover:-translate-y-0.5 transition-all duration-300"
           >
-            무료로 시작하기
+            {session ? "대시보드 바로가기" : "무료로 시작하기"}
           </Link>
-          <Link
-            href="/login"
-            className="px-8 py-3.5 rounded-2xl border border-card-border text-muted hover:text-foreground hover:border-accent/30 font-medium transition-all duration-300"
-          >
-            로그인
-          </Link>
+          {!session && (
+            <Link
+              href="/login"
+              className="px-8 py-3.5 rounded-2xl border border-card-border text-muted hover:text-foreground hover:border-accent/30 font-medium transition-all duration-300"
+            >
+              로그인
+            </Link>
+          )}
         </div>
       </div>
     </div>
